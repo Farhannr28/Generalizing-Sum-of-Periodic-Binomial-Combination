@@ -21,8 +21,20 @@ T BinaryExponentiationImplementation(T a, int exp){
     exp--;
     T res = a;
     while (exp > 0) {
-        if (exp & 1)
+
+        // cout << exp << "\n";
+        // cout << "RES: " << "\n";
+        // res.printCoefficients();
+        // cout << "A: " << "\n";
+        // a.printCoefficients();
+        // cout << "\n";
+
+        if (exp & 1){
             res *= a;
+
+            // cout << "ODD\n";
+
+        }
         a *= a;
         exp = exp >> 1;
     }

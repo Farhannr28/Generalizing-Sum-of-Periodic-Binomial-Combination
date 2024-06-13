@@ -36,7 +36,7 @@ void Polynomial::setDegree(int _degree){
 
 void Polynomial::reduceDegree(int m){
     for (int i=m; i<=this->getDegree(); i++){
-        this->coefficients[i%m] += this->coefficients[i];
+        this->coefficients[i%m] = this->coefficients[i%m] + this->coefficients[i] % MOD;
     }
     this->coefficients.resize(m);
     this->degree = m-1;

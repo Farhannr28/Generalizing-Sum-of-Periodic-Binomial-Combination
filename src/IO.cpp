@@ -40,7 +40,7 @@ void IO::title(){
         | | |  __/ |  | | (_) | (_| | | (__  | \__/\ (_) | | | | | | |_) | | | | | (_| | |_| | (_) | | | | /\__/ / |_| | | | | | |
         \_|  \___|_|  |_|\___/ \__,_|_|\___|  \____/\___/|_| |_| |_|_.__/|_|_| |_|\__,_|\__|_|\___/|_| |_| \____/ \__,_|_| |_| |_|
         )" << endl;
-    cout << R"(_.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._)";
+    cout << R"(_.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._)";
     cout << endl;
     cout << ">>> Written by Farhan Nafis Rayhan for his Strategy & Algorithms paper" << endl;
     cout << endl;
@@ -63,7 +63,11 @@ void IO::askInputs(){
     cin >> this->N_input >> this->M_input >> this->R_input;
     cout << endl;
     cout << ">>> Great! that means you want to calculate the following" << endl;
-    cout << "           " << N_input << "C" << R_input << " + " << N_input << "C" << M_input + R_input << " + " << N_input << "C" << 2*M_input + R_input << " + ... " << endl;
+    cout << "           " << N_input << "C" << R_input << " + " << N_input << "C" << M_input + R_input;
+    if (N_input >= 2*M_input + R_input){
+        cout << " + " << N_input << "C" << 2*M_input + R_input;
+    } 
+    cout << " + ... " << endl;
     cout << endl;
     cout << ">>> Please wait as the algorithm crunching the numbers" << endl;
     cout << endl;

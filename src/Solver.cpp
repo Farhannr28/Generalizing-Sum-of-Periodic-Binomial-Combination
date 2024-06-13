@@ -48,24 +48,40 @@ int Solver::Calculate(int N, int M, int R){
     NumberTheoreticTransform::getInstance().setM(M);
     int C = Exponentiation<int>::getInstance().BinaryExponentiation(2, N, MOD);
     Polynomial result(M-1);
-    Polynomial temp(0);
+    Polynomial temp(1);
     Polynomial expo(M-1);
     temp.getCoefficients()[0] = 1;
-    temp.getCoefficients().push_back(1);
+    temp.getCoefficients()[1] = 1;
     expo = Exponentiation<Polynomial>::getInstance().BinaryExponentiation(temp, N);
+
+    // temp.printCoefficients();
+    // cout << "\n";
+    // expo.printCoefficients();
+    // cout << "\n";
+
     for (int j=0; j<M; j++){
         result.getCoefficients()[(j + M - R) % M] += expo.getCoefficients()[j];
     }
     for (int i=2; i<M; i++){
         temp.getCoefficients().push_back(1);
         temp.getCoefficients()[i-1] = 0;
+        temp.setDegree(temp.getDegree()+1);
         expo = Exponentiation<Polynomial>::getInstance().BinaryExponentiation(temp, N);
+
+        // temp.printCoefficients();
+        // cout << "\n";
+        // expo.printCoefficients();
+        // cout << "\n";
+
         for (int j=0; j<M; j++){
             result.getCoefficients()[(j + (i * (M-R))) % M] += expo.getCoefficients()[j];
         }
     }
-
     result.getCoefficients()[0] = (C + result.getCoefficients()[0]) % MOD;
+
+
+    // result.printCoefficients();
+
 
     result.reducePolynom(M);
 
@@ -75,8 +91,10 @@ int Solver::Calculate(int N, int M, int R){
     while (k < M && result.getCoefficients()[k] == 0){
         k++;
     }
+
     int answer = result.getCoefficients()[0];
-    answer = (answer * Exponentiation<int>::getInstance().inverse(M, MOD)) % MOD;
+
+    answer = ((1LL) * answer * Exponentiation<int>::getInstance().inverse(M, MOD)) % MOD;
     if (k == M){
         // Show Answer, as a positive
         return answer;

@@ -16,7 +16,7 @@ class Polynomial {
     private:
         vector<int> coefficients;
         int degree;
-
+        const int MOD = 998244353;
     public:
         Polynomial(int d);
         Polynomial(initializer_list<int> list);

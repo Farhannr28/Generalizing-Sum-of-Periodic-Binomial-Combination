@@ -55,6 +55,9 @@ Polynomial NumberTheoreticTransform::multiply(Polynomial a, Polynomial b) {
     while (n < a.getDegree() + b.getDegree() + 1) {
         n <<= 1;
     }
+
+    // cout << "N: " << n << "\n";
+
     a.getCoefficients().resize(n);
     b.getCoefficients().resize(n);
     NumberTheoreticTransform::ntt(a.getCoefficients(), n, ROOT);
@@ -64,34 +67,28 @@ Polynomial NumberTheoreticTransform::multiply(Polynomial a, Polynomial b) {
         c[i] = 1LL * a.getCoefficients()[i] * b.getCoefficients()[i] % MOD;
     }
     NumberTheoreticTransform::ntt_inverse(c, n);
-    Polynomial res(n-2);
+    Polynomial res(n-1);
     res.setCoefficients(c);
+
+    // cout << "MULTIPLICATION RESULT: \n";
+    // res.printCoefficients();
+    // cout << "\n";
+    // cout << res.getDegree() << "\n";
+    // cout << "\n";
+
     res.reduceDegree(m);
+
+
+    // res.printCoefficients();
+    // cout << "\n";
+
+
     res.reducePolynom(m);
+
+
+    // res.printCoefficients();
+    // cout << "\n";
+
+
     return res;
 }
-
-// int main() {
-//     // Polynomial a({1,1});
-//     // Polynomial res({1,1});
-//     // for (int i=0; i<3; i++){
-//     //     res = NumberTheoreticTransform::getInstance().multiply(res, a);
-//     // }
-//     // res.printCoefficients();
-//     // cout << "\n";
-//     // Polynomial a1({1,0,1});
-//     // Polynomial res1({1,0,1});
-//     // for (int i=0; i<3; i++){
-//     //     res1 = NumberTheoreticTransform::getInstance().multiply(res1, a1);
-//     // }
-//     // res1.printCoefficients();
-//     // cout << "\n";
-
-//     Polynomial a({1,1});
-//     Polynomial res = Exponentiation<Polynomial>::getInstance().BinaryExponentiation(a, 5, 998244353);
-//     Polynomial a2({1,0,1});
-//     Polynomial res2 = Exponentiation<Polynomial>::getInstance().BinaryExponentiation(a2, 5, 998244353);
-//     res.printCoefficients();
-//     res2.printCoefficients();
-//     return 0;
-// }
